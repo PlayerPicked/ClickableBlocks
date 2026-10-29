@@ -1,0 +1,11 @@
+# Docs: https://docs.playerpicked.com/clickableblocks/settings
+hooks:
+  # Click costs and the [money] action.
+  vault:
+    enabled: true
+
+  # Placeholders in actions and the %clickableblocks_...% expansion.
+  placeholderapi:
+    enabled: true
+
+version: 1

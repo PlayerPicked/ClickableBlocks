@@ -1,0 +1,33 @@
+name: ClickableBlocks
+version: '${version}'
+
+main: com.playerpicked.clickableblocks.ClickableBlocks
+api-version: '26.2'
+load: POSTWORLD
+
+description: Clickable blocks and item displays that run actions, built fully in-game.
+website: https://dc.playerpicked.com
+authors: [ kxtsoo ]
+
+softdepend: [ Vault, PlaceholderAPI ]
+
+permissions:
+  clickableblocks.*:
+    description: Every ClickableBlocks permission.
+    default: false
+    children:
+      clickableblocks.admin: true
+      clickableblocks.use: true
+      clickableblocks.bypass: true
+
+  clickableblocks.admin:
+    description: Create, edit and delete clickable blocks, use the wand and every command.
+    default: op
+
+  clickableblocks.use:
+    description: Click clickable blocks.
+    default: true
+
+  clickableblocks.bypass:
+    description: Ignore cooldowns and use limits of clickable blocks (costs still apply).
+    default: false

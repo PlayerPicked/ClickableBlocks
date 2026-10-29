@@ -1,0 +1,249 @@
+# Docs: https://docs.playerpicked.com/clickableblocks/menus
+# Text inputs of the in-game editor. Every dialog has a title, body lines, one input and a confirm / cancel button.
+settings:
+  # Seconds before the buttons of an open dialog stop working.
+  timeout: 300
+  cancel-message: true
+
+dialogs:
+  create:
+    title: "&#FFFFFFCreate a clickable"
+    body:
+      - "&#CDD5E0Type: &#FFBD72{type}"
+      - "&#CDD5E0Location: &#FFBD72{location}"
+      - ""
+      - "&#8B95A5Pick a unique id. Letters, numbers, - and _ only."
+    input:
+      label: "&#8B95A5Id"
+      width: 300
+      max-length: 48
+    confirm:
+      label: "&#6BD88BCreate"
+      tooltip: "&#8B95A5Create and open the editor"
+      width: 100
+    cancel:
+      label: "&#F06464Cancel"
+      width: 100
+
+  clone:
+    title: "&#FFFFFFClone {id}"
+    body:
+      - "&#CDD5E0Every setting, action and the look of &#FFBD72{id}"
+      - "&#CDD5E0is copied to a new clickable where you are looking."
+      - ""
+      - "&#8B95A5Pick the id of the copy."
+    input:
+      label: "&#8B95A5New id"
+      width: 300
+      max-length: 48
+    confirm:
+      label: "&#6BD88BClone"
+      width: 100
+    cancel:
+      label: "&#F06464Cancel"
+      width: 100
+
+  action-add:
+    title: "&#FFFFFFNew action - {trigger}"
+    body:
+      - "&#CDD5E0Format: &#FFBD72[type] value"
+      - "&#CDD5E0Types: &#FFBD72{types}"
+      - ""
+      - "&#8B95A5[console] give {player} diamond 1"
+      - "&#8B95A5[message] &aWelcome {player}!"
+      - "&#8B95A5[title] &6Hello;&7Have fun;10;40;10"
+      - "&#8B95A5[delay] 20  &7(waits 1 second)"
+      - ""
+      - "&#8B95A5A line without [type] runs as a player command."
+    input:
+      label: "&#8B95A5Action"
+      width: 400
+      max-length: 512
+    confirm:
+      label: "&#6BD88BAdd"
+      width: 100
+    cancel:
+      label: "&#F06464Cancel"
+      width: 100
+
+  action-edit:
+    title: "&#FFFFFFEdit action - {trigger}"
+    body:
+      - "&#CDD5E0Format: &#FFBD72[type] value"
+      - "&#CDD5E0Types: &#FFBD72{types}"
+    input:
+      label: "&#8B95A5Action"
+      width: 400
+      max-length: 512
+    confirm:
+      label: "&#6BD88BSave"
+      width: 100
+    cancel:
+      label: "&#F06464Cancel"
+      width: 100
+
+  permission:
+    title: "&#FFFFFFPermission of {id}"
+    body:
+      - "&#CDD5E0Players need this permission to click the block."
+      - "&#8B95A5Leave it empty to let everyone click."
+    input:
+      label: "&#8B95A5Permission"
+      width: 300
+      max-length: 128
+    confirm:
+      label: "&#6BD88BSave"
+      width: 100
+    cancel:
+      label: "&#F06464Cancel"
+      width: 100
+
+  cooldown:
+    title: "&#FFFFFFCooldown of {id}"
+    body:
+      - "&#CDD5E0How long each player has to wait between clicks."
+      - "&#8B95A5Examples: 5, 30s, 1m 30s, 2h, 1d. Empty means no cooldown."
+    input:
+      label: "&#8B95A5Cooldown"
+      width: 300
+      max-length: 32
+    confirm:
+      label: "&#6BD88BSave"
+      width: 100
+    cancel:
+      label: "&#F06464Cancel"
+      width: 100
+
+  cost:
+    title: "&#FFFFFFCost of {id}"
+    body:
+      - "&#CDD5E0Money taken from the player on every click (needs Vault)."
+      - "&#8B95A5Empty or 0 means free."
+    input:
+      label: "&#8B95A5Cost"
+      width: 300
+      max-length: 32
+    confirm:
+      label: "&#6BD88BSave"
+      width: 100
+    cancel:
+      label: "&#F06464Cancel"
+      width: 100
+
+  max-uses:
+    title: "&#FFFFFFUses of {id}"
+    body:
+      - "&#CDD5E0How many times a single player can use this block, ever."
+      - "&#8B95A5Empty or 0 means unlimited."
+    input:
+      label: "&#8B95A5Uses"
+      width: 300
+      max-length: 10
+    confirm:
+      label: "&#6BD88BSave"
+      width: 100
+    cancel:
+      label: "&#F06464Cancel"
+      width: 100
+
+  hologram-lines:
+    title: "&#FFFFFFHologram of {id}"
+    body:
+      - "&#CDD5E0One line per row, up to {max} rows."
+      - "&#CDD5E0Color codes and hex colors work."
+      - "&#8B95A5Leave it empty to remove the text."
+    input:
+      label: "&#8B95A5Lines"
+      width: 400
+      max-length: 1024
+      multiline:
+        enabled: true
+        max-lines: 10
+        height: 128
+    confirm:
+      label: "&#6BD88BSave"
+      width: 100
+    cancel:
+      label: "&#F06464Cancel"
+      width: 100
+
+  glow-color:
+    title: "&#FFFFFFGlow color of {id}"
+    body:
+      - "&#CDD5E0Any hex color, for example &#FFBD72#FFAA00"
+    input:
+      label: "&#8B95A5Color"
+      width: 200
+      max-length: 9
+    confirm:
+      label: "&#6BD88BSave"
+      width: 100
+    cancel:
+      label: "&#F06464Cancel"
+      width: 100
+
+  scale:
+    title: "&#FFFFFFScale of {id}"
+    body:
+      - "&#CDD5E0One number scales evenly, three numbers set x y z."
+      - "&#8B95A5Examples: 1.5 or 2 0.5 2 (0.05 - 16)"
+    input:
+      label: "&#8B95A5Scale"
+      width: 300
+      max-length: 64
+    confirm:
+      label: "&#6BD88BSave"
+      width: 100
+    cancel:
+      label: "&#F06464Cancel"
+      width: 100
+
+  rotation:
+    title: "&#FFFFFFRotation of {id}"
+    body:
+      - "&#CDD5E0Yaw pitch roll in degrees."
+      - "&#8B95A5Example: 45 0 0"
+    input:
+      label: "&#8B95A5Rotation"
+      width: 300
+      max-length: 64
+    confirm:
+      label: "&#6BD88BSave"
+      width: 100
+    cancel:
+      label: "&#F06464Cancel"
+      width: 100
+
+  offset:
+    title: "&#FFFFFFOffset of {id}"
+    body:
+      - "&#CDD5E0Moves the display from the center of its block, x y z in blocks."
+      - "&#8B95A5Example: 0 0.25 0 (-8 - 8)"
+    input:
+      label: "&#8B95A5Offset"
+      width: 300
+      max-length: 64
+    confirm:
+      label: "&#6BD88BSave"
+      width: 100
+    cancel:
+      label: "&#F06464Cancel"
+      width: 100
+
+  hitbox:
+    title: "&#FFFFFFHitbox of {id}"
+    body:
+      - "&#CDD5E0The clickable area, width and height in blocks."
+      - "&#8B95A5Example: 1 1.5 - or 0 for automatic sizing."
+    input:
+      label: "&#8B95A5Hitbox"
+      width: 300
+      max-length: 32
+    confirm:
+      label: "&#6BD88BSave"
+      width: 100
+    cancel:
+      label: "&#F06464Cancel"
+      width: 100
+
+version: 1

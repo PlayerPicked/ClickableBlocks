@@ -1,0 +1,104 @@
+# Docs: https://docs.playerpicked.com/clickableblocks/settings
+database:
+  # H2, MySQL
+  type: "h2"
+
+  mysql:
+    host: "localhost"
+    port: 3306
+    database: "database"
+    username: "username"
+    password: "password"
+    useSSL: false
+
+  pool:
+    maximumPoolSize: 10
+    minimumIdle: 2
+    connectionTimeout: 30000
+    maxLifetime: 1800000
+    idleTimeout: 600000
+    setLeakDetectionThreshold: 60000
+
+click:
+  # Minimum time between two clicks of the same player in milliseconds.
+  # Filters the double events Minecraft sends for a single click (main hand + offhand, attack + swing).
+  debounce: 200
+
+  # New BLOCK clickables cancel the vanilla interaction (opening a chest, pressing a button, placing a block on it).
+  # Can be changed per block in the editor.
+  cancel-interaction-by-default: true
+
+  # Stops BLOCK clickables from being broken, blown up, pushed by pistons, burned, washed away or picked up by endermen.
+  protect-blocks: true
+
+editor:
+  # Used when you create a display without holding anything.
+  default-item: "DIAMOND_BLOCK"
+  default-block: "GOLD_BLOCK"
+
+  # How far the editor looks when you create or move something by looking at it.
+  reach: 6
+
+  # How much one left / right click changes a value in the appearance menu. Shift click always opens an exact input.
+  steps:
+    scale: 0.1
+    rotation: 15
+    offset: 0.0625
+    hologram-height: 0.05
+    view-range: 0.5
+
+  # Left / right click on the glow color cycles through these, shift click accepts any hex color.
+  glow-colors:
+    - "#FFFFFF"
+    - "#FF3C52"
+    - "#FFBD72"
+    - "#FFE45C"
+    - "#47FF79"
+    - "#4DE1FF"
+    - "#5C7CFF"
+    - "#C77DFF"
+    - "#FF7AD9"
+
+  # Ambient particles you can pick in the editor. Only particles without extra data work here.
+  particles:
+    - "NONE"
+    - "HAPPY_VILLAGER"
+    - "END_ROD"
+    - "FLAME"
+    - "SOUL_FIRE_FLAME"
+    - "ENCHANT"
+    - "HEART"
+    - "NOTE"
+    - "PORTAL"
+    - "ELECTRIC_SPARK"
+    - "WAX_ON"
+    - "GLOW"
+    - "TOTEM_OF_UNDYING"
+    - "CHERRY_LEAVES"
+
+  # Right click on spin / bob cycles through these (degrees per second / blocks).
+  spin-speeds: [ "15", "30", "45", "90", "180" ]
+  bob-heights: [ "0.05", "0.1", "0.15", "0.25", "0.4" ]
+
+# The editor wand. Right click a block to turn it into a clickable, click a clickable to edit it.
+wand:
+  material: BLAZE_ROD
+  name: "&#FFBD72Clickable Wand"
+  lore:
+    - "&#878787Right click a block: &#FFFFFFcreate"
+    - "&#878787Click a clickable: &#FFFFFFedit"
+
+visuals:
+  # Ticks between animation frames of spinning / bobbing displays. Lower is smoother, higher is cheaper.
+  animation-interval: 2
+  # Ticks between ambient particle bursts.
+  particle-interval: 20
+  # Ticks between checks that respawn displays killed by /kill or other plugins.
+  watchdog-interval: 100
+  # Max width of a hologram line in pixels before it wraps.
+  hologram-line-width: 200
+
+# Ticks between saving edited blocks to the database. Edits are batched, so a block is written once per interval.
+save-interval: 40
+
+version: 1

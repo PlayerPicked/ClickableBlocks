@@ -1,0 +1,954 @@
+# Docs: https://docs.playerpicked.com/clickableblocks/menus
+# Every functional item lives under <menu>.items, everything under <menu>.decoration is only for looks
+# and is placed into the slots that are still empty (slot: fill), so it never covers a button.
+
+editor:
+  title: '&8Editing: {id}'
+  size: 54
+  tick: 0
+
+  sounds:
+    open: "minecraft:block.chest.open"
+    action: "minecraft:ui.button.click"
+    error: "minecraft:block.note_block.bass"
+
+  items:
+    info:
+      slot: 4
+      material: NAME_TAG
+      name: '&#FFBD72{id}'
+      lore:
+        - '&#7A8592Type: &#FFFFFF{type}'
+        - '&#7A8592Location: &#FFFFFF{location}'
+        - '&#7A8592Status: &#FFFFFF{state}'
+        - '&#7A8592Actions: &#FFFFFF{actions}'
+        - '&#7A8592Permission: &#FFFFFF{permission}'
+        - '&#7A8592Cooldown: &#FFFFFF{cooldown}'
+        - '&#7A8592Cost: &#FFFFFF{cost}'
+        - '&#7A8592Uses per player: &#FFFFFF{max_uses}'
+
+    status:
+      slot: 19
+      material: LEVER
+      name: '&#47FF79Status'
+      lore:
+        - '&#7A8592A disabled block ignores every click and'
+        - '&#7A8592hides its display, glow, hologram and particles'
+        - '&#7A8592(edit it again from /cb or the list)'
+        - ''
+        - ' &#D3DBE3◆ Current: &#FFFFFF{state}'
+        - ''
+        - '&#C7D0D9» Click: &#FFFFFFToggle'
+
+    actions:
+      slot: 20
+      material: COMMAND_BLOCK
+      name: '&#FFBD72Actions'
+      lore:
+        - '&#7A8592What happens on left, right,'
+        - '&#7A8592shift and any click'
+        - ''
+        - ' &#D3DBE3◆ Actions: &#FFFFFF{actions}'
+        - ''
+        - '&#C7D0D9» Click: &#FFFFFFOpen'
+
+    settings:
+      slot: 21
+      material: CLOCK
+      name: '&#4DE1FFRequirements'
+      lore:
+        - '&#7A8592Permission, cooldown, cost and use limit'
+        - ''
+        - ' &#D3DBE3◆ Permission: &#FFFFFF{permission}'
+        - ' &#D3DBE3◆ Cooldown: &#FFFFFF{cooldown}'
+        - ' &#D3DBE3◆ Cost: &#FFFFFF{cost}'
+        - ' &#D3DBE3◆ Uses: &#FFFFFF{max_uses}'
+        - ''
+        - '&#C7D0D9» Click: &#FFFFFFOpen'
+
+    appearance:
+      slot: 22
+      material: ARMOR_STAND
+      name: '&#C77DFFAppearance'
+      lore:
+        - '&#7A8592Item, scale, rotation, glow,'
+        - '&#7A8592animations and hitbox'
+        - ''
+        - ' &#D3DBE3◆ Item: &#FFFFFF{item}'
+        - ' &#D3DBE3◆ Glow: &#FFFFFF{glow}'
+        - ''
+        - '&#C7D0D9» Click: &#FFFFFFOpen'
+
+    hologram:
+      slot: 23
+      material: OAK_SIGN
+      name: '&#FFE45CHologram'
+      lore:
+        - '&#7A8592Floating text above the block'
+        - ''
+        - ' &#D3DBE3◆ Status: &#FFFFFF{hologram}'
+        - ''
+        - '&#C7D0D9» Click: &#FFFFFFOpen'
+
+    particle:
+      slot: 24
+      material: BLAZE_POWDER
+      name: '&#FF7AD9Ambient Particle'
+      lore:
+        - '&#7A8592Particles around the block all the time'
+        - ''
+        - ' &#D3DBE3◆ Current: &#FFFFFF{particle}'
+        - ''
+        - '&#C7D0D9» Left click: &#FFFFFFNext'
+        - '&#C7D0D9» Right click: &#FFFFFFPrevious'
+
+    type:
+      slot: 25
+      material: COMPARATOR
+      name: '&#5C7CFFType'
+      lore:
+        - '&#7A8592Block: a real block in the world'
+        - '&#7A8592Item display: any item, scalable'
+        - '&#7A8592Block display: a floating block model'
+        - ''
+        - ' &#D3DBE3◆ Current: &#FFFFFF{type}'
+        - ''
+        - '&#C7D0D9» Left click: &#FFFFFFNext'
+        - '&#C7D0D9» Right click: &#FFFFFFPrevious'
+
+    move:
+      slot: 29
+      material: ENDER_PEARL
+      name: '&#4DE1FFMove Here'
+      lore:
+        - '&#7A8592Moves the block to the block you look at'
+        - '&#7A8592(displays go in front of the face you look at)'
+        - ''
+        - '&#C7D0D9» Click: &#FFFFFFMove'
+
+    teleport:
+      slot: 30
+      material: COMPASS
+      name: '&#4DE1FFTeleport'
+      lore:
+        - ' &#D3DBE3◆ Location: &#FFFFFF{location}'
+        - ''
+        - '&#C7D0D9» Click: &#FFFFFFTeleport there'
+
+    test:
+      slot: 31
+      material: FIREWORK_ROCKET
+      name: '&#47FF79Test Run'
+      lore:
+        - '&#7A8592Runs the actions right now,'
+        - '&#7A8592skipping every requirement'
+        - ''
+        - '&#C7D0D9» Left / right click: &#FFFFFFTest that click'
+        - '&#C7D0D9» Shift + left / right: &#FFFFFFTest the shift click'
+
+    clone:
+      slot: 32
+      material: PAPER
+      name: '&#FFBD72Clone'
+      lore:
+        - '&#7A8592Copies everything to a new block'
+        - '&#7A8592where you are looking'
+        - ''
+        - '&#C7D0D9» Click: &#FFFFFFClone'
+
+    delete:
+      slot: 33
+      material: BARRIER
+      name: '&#FF3C52Delete'
+      lore:
+        - '&#7A8592Removes the clickable block for good'
+        - '&#7A8592(the real block stays in the world)'
+        - ''
+        - '&#C7D0D9» Click: &#FFFFFFDelete'
+
+    back:
+      slot: 45
+      material: ARROW
+      name: '&#C7D0D9Block List'
+
+    close:
+      slot: 49
+      material: OAK_DOOR
+      name: '&#FF3C52Close'
+
+  decoration:
+    filler:
+      slot: fill
+      material: GRAY_STAINED_GLASS_PANE
+      name: ' '
+
+triggers:
+  title: '&8Actions: {id}'
+  size: 36
+  tick: 0
+
+  sounds:
+    open: "minecraft:block.chest.open"
+    action: "minecraft:ui.button.click"
+    error: "minecraft:block.note_block.bass"
+
+  items:
+    left:
+      slot: 10
+      material: IRON_SWORD
+      name: '&#FFBD72{trigger}'
+      flag: [ HIDE_ATTRIBUTES ]
+      lore:
+        - ' &#D3DBE3◆ Actions: &#FFFFFF{count}'
+        - ''
+        - '&#7A8592{preview}'
+        - ''
+        - '&#C7D0D9» Click: &#FFFFFFEdit'
+
+    right:
+      slot: 12
+      material: STICK
+      name: '&#FFBD72{trigger}'
+      lore:
+        - ' &#D3DBE3◆ Actions: &#FFFFFF{count}'
+        - ''
+        - '&#7A8592{preview}'
+        - ''
+        - '&#C7D0D9» Click: &#FFFFFFEdit'
+
+    shift-left:
+      slot: 14
+      material: GOLDEN_SWORD
+      name: '&#FFBD72{trigger}'
+      flag: [ HIDE_ATTRIBUTES ]
+      lore:
+        - ' &#D3DBE3◆ Actions: &#FFFFFF{count}'
+        - ''
+        - '&#7A8592{preview}'
+        - ''
+        - '&#C7D0D9» Click: &#FFFFFFEdit'
+
+    shift-right:
+      slot: 16
+      material: BLAZE_ROD
+      name: '&#FFBD72{trigger}'
+      lore:
+        - ' &#D3DBE3◆ Actions: &#FFFFFF{count}'
+        - ''
+        - '&#7A8592{preview}'
+        - ''
+        - '&#C7D0D9» Click: &#FFFFFFEdit'
+
+    any:
+      slot: 22
+      material: NETHER_STAR
+      name: '&#47FF79{trigger}'
+      lore:
+        - '&#7A8592Runs after every other click,'
+        - '&#7A8592great for sounds and messages'
+        - ''
+        - ' &#D3DBE3◆ Actions: &#FFFFFF{count}'
+        - ''
+        - '&#7A8592{preview}'
+        - ''
+        - '&#C7D0D9» Click: &#FFFFFFEdit'
+
+    back:
+      slot: 31
+      material: ARROW
+      name: '&#C7D0D9Back'
+
+  decoration:
+    filler:
+      slot: fill
+      material: GRAY_STAINED_GLASS_PANE
+      name: ' '
+
+actions:
+  title: '&8{trigger}: {id}'
+  size: 54
+  tick: 0
+  content-slots: [ 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 28, 29, 30, 31, 32, 33, 34 ]
+
+  sounds:
+    open: "minecraft:block.chest.open"
+    action: "minecraft:ui.button.click"
+    error: "minecraft:block.note_block.bass"
+    page: "minecraft:item.book.page_turn"
+
+  items:
+    entry:
+      material: PAPER
+      name: '&#FFBD72#{index} &#7A8592[{type}]'
+      lore:
+        - '&#FFFFFF{action}'
+        - ''
+        - '&#C7D0D9» Left click: &#FFFFFFEdit'
+        - '&#C7D0D9» Right click: &#FFFFFFRemove'
+        - '&#C7D0D9» Shift + left: &#FFFFFFMove up'
+        - '&#C7D0D9» Shift + right: &#FFFFFFMove down'
+
+    empty:
+      slot: 22
+      material: STRUCTURE_VOID
+      name: '&#878787No actions yet'
+      lore:
+        - '&#7A8592Click the emerald to add one'
+
+    add:
+      slot: 49
+      material: EMERALD
+      name: '&#47FF79Add Action'
+      lore:
+        - ' &#D3DBE3◆ Actions: &#FFFFFF{count}/{max}'
+        - ''
+        - '&#C7D0D9» Click: &#FFFFFFAdd'
+
+    help:
+      slot: 53
+      material: BOOK
+      name: '&#4DE1FFAction Types'
+      lore:
+        - '&#7A8592[player] [console] [message]'
+        - '&#7A8592[broadcast] [actionbar] [title]'
+        - '&#7A8592[sound] [particle] [effect]'
+        - '&#7A8592[teleport] [server] [money]'
+        - '&#7A8592[close] [delay]'
+        - ''
+        - '&#C7D0D9» Click: &#FFFFFFExamples in chat'
+
+    back:
+      slot: 45
+      material: ARROW
+      name: '&#C7D0D9Back'
+
+    previous:
+      slot: 48
+      material: SPECTRAL_ARROW
+      name: '&#C7D0D9Previous Page'
+      lore:
+        - '&#7A8592Page {page}/{pages}'
+
+    next:
+      slot: 50
+      material: SPECTRAL_ARROW
+      name: '&#C7D0D9Next Page'
+      lore:
+        - '&#7A8592Page {page}/{pages}'
+
+  decoration:
+    filler:
+      slot: fill
+      material: GRAY_STAINED_GLASS_PANE
+      name: ' '
+
+settings:
+  title: '&8Requirements: {id}'
+  size: 36
+  tick: 0
+
+  sounds:
+    open: "minecraft:block.chest.open"
+    action: "minecraft:ui.button.click"
+    error: "minecraft:block.note_block.bass"
+
+  items:
+    permission:
+      slot: 10
+      material: TRIPWIRE_HOOK
+      name: '&#4DE1FFPermission'
+      lore:
+        - '&#7A8592Only players with this permission can click'
+        - ''
+        - ' &#D3DBE3◆ Current: &#FFFFFF{permission}'
+        - ''
+        - '&#C7D0D9» Left click: &#FFFFFFSet'
+        - '&#C7D0D9» Right click: &#FFFFFFRemove'
+
+    cooldown:
+      slot: 11
+      material: CLOCK
+      name: '&#4DE1FFCooldown'
+      lore:
+        - '&#7A8592Wait time between clicks, per player'
+        - ''
+        - ' &#D3DBE3◆ Current: &#FFFFFF{cooldown}'
+        - ''
+        - '&#C7D0D9» Left click: &#FFFFFFSet'
+        - '&#C7D0D9» Right click: &#FFFFFFRemove'
+
+    cost:
+      slot: 12
+      material: GOLD_INGOT
+      name: '&#4DE1FFCost'
+      lore:
+        - '&#7A8592Money taken on every click (Vault)'
+        - ''
+        - ' &#D3DBE3◆ Current: &#FFFFFF{cost}'
+        - ''
+        - '&#C7D0D9» Left click: &#FFFFFFSet'
+        - '&#C7D0D9» Right click: &#FFFFFFMake it free'
+
+    max-uses:
+      slot: 13
+      material: HOPPER
+      name: '&#4DE1FFUses Per Player'
+      lore:
+        - '&#7A8592How many times one player can use it'
+        - ''
+        - ' &#D3DBE3◆ Current: &#FFFFFF{max_uses}'
+        - ' &#D3DBE3◆ Used by: &#FFFFFF{used_by} players'
+        - ''
+        - '&#C7D0D9» Left click: &#FFFFFFSet'
+        - '&#C7D0D9» Right click: &#FFFFFFUnlimited'
+
+    reset-uses:
+      slot: 14
+      material: WATER_BUCKET
+      name: '&#FF3C52Reset Uses'
+      lore:
+        - '&#7A8592Clears every use count and cooldown'
+        - '&#7A8592of this block for every player'
+        - ''
+        - '&#C7D0D9» Shift click: &#FFFFFFReset'
+
+    interaction:
+      slot: 16
+      material: CHEST
+      name: '&#FFBD72Cancel Block Interaction'
+      lore:
+        - '&#7A8592When enabled the real block does nothing,'
+        - '&#7A8592chests don''t open, buttons don''t press'
+        - ''
+        - ' &#D3DBE3◆ Current: &#FFFFFF{state}'
+        - ''
+        - '&#C7D0D9» Click: &#FFFFFFToggle'
+
+    back:
+      slot: 31
+      material: ARROW
+      name: '&#C7D0D9Back'
+
+  decoration:
+    filler:
+      slot: fill
+      material: GRAY_STAINED_GLASS_PANE
+      name: ' '
+
+appearance:
+  title: '&8Appearance: {id}'
+  size: 54
+  tick: 0
+
+  sounds:
+    open: "minecraft:block.chest.open"
+    action: "minecraft:ui.button.click"
+    error: "minecraft:block.note_block.bass"
+
+  items:
+    item:
+      slot: 4
+      material: ITEM_FRAME
+      name: '&#C77DFFDisplayed Item'
+      lore:
+        - ' &#D3DBE3◆ Current: &#FFFFFF{item}'
+        - ''
+        - '&#C7D0D9» Click: &#FFFFFFUse the item in your hand'
+        - '&#C7D0D9» Or click any item in your inventory'
+
+    block:
+      slot: 4
+      material: GRASS_BLOCK
+      name: '&#C77DFFBlock'
+      lore:
+        - ' &#D3DBE3◆ Current: &#FFFFFF{block}'
+        - ''
+        - '&#C7D0D9» Click: &#FFFFFFUse the block in your hand'
+        - '&#C7D0D9» Or click any block in your inventory'
+
+    scale:
+      slot: 19
+      material: SLIME_BALL
+      name: '&#C77DFFScale'
+      lore:
+        - ' &#D3DBE3◆ Current: &#FFFFFF{scale}'
+        - ''
+        - '&#C7D0D9» Left click: &#FFFFFF+{scale_step}'
+        - '&#C7D0D9» Right click: &#FFFFFF-{scale_step}'
+        - '&#C7D0D9» Shift click: &#FFFFFFExact x y z'
+
+    yaw:
+      slot: 20
+      material: RECOVERY_COMPASS
+      name: '&#C77DFFYaw'
+      lore:
+        - '&#7A8592Turns left and right'
+        - ''
+        - ' &#D3DBE3◆ Current: &#FFFFFF{yaw}°'
+        - ''
+        - '&#C7D0D9» Left click: &#FFFFFF+{rotation_step}°'
+        - '&#C7D0D9» Right click: &#FFFFFF-{rotation_step}°'
+        - '&#C7D0D9» Shift click: &#FFFFFFExact rotation'
+
+    pitch:
+      slot: 21
+      material: RECOVERY_COMPASS
+      name: '&#C77DFFPitch'
+      lore:
+        - '&#7A8592Tilts forward and back'
+        - ''
+        - ' &#D3DBE3◆ Current: &#FFFFFF{pitch}°'
+        - ''
+        - '&#C7D0D9» Left click: &#FFFFFF+{rotation_step}°'
+        - '&#C7D0D9» Right click: &#FFFFFF-{rotation_step}°'
+        - '&#C7D0D9» Shift click: &#FFFFFFExact rotation'
+
+    roll:
+      slot: 22
+      material: RECOVERY_COMPASS
+      name: '&#C77DFFRoll'
+      lore:
+        - '&#7A8592Tilts to the sides'
+        - ''
+        - ' &#D3DBE3◆ Current: &#FFFFFF{roll}°'
+        - ''
+        - '&#C7D0D9» Left click: &#FFFFFF+{rotation_step}°'
+        - '&#C7D0D9» Right click: &#FFFFFF-{rotation_step}°'
+        - '&#C7D0D9» Shift click: &#FFFFFFExact rotation'
+
+    billboard:
+      slot: 23
+      material: PAINTING
+      name: '&#C77DFFBillboard'
+      lore:
+        - '&#7A8592FIXED keeps the rotation, CENTER always'
+        - '&#7A8592faces the player, VERTICAL / HORIZONTAL'
+        - '&#7A8592turn around one axis only'
+        - ''
+        - ' &#D3DBE3◆ Current: &#FFFFFF{billboard}'
+        - ''
+        - '&#C7D0D9» Left click: &#FFFFFFNext'
+        - '&#C7D0D9» Right click: &#FFFFFFPrevious'
+
+    transform:
+      slot: 24
+      material: ARMOR_STAND
+      name: '&#C77DFFItem Transform'
+      lore:
+        - '&#7A8592How the item is held: NONE shows it full size,'
+        - '&#7A8592HEAD, GUI, GROUND, FIXED... use the item''s models'
+        - ''
+        - ' &#D3DBE3◆ Current: &#FFFFFF{transform}'
+        - ''
+        - '&#C7D0D9» Left click: &#FFFFFFNext'
+        - '&#C7D0D9» Right click: &#FFFFFFPrevious'
+
+    offset-x:
+      slot: 28
+      material: RED_DYE
+      name: '&#FF3C52Offset X'
+      lore:
+        - ' &#D3DBE3◆ Current: &#FFFFFF{offset_x}'
+        - ''
+        - '&#C7D0D9» Left click: &#FFFFFF+{offset_step}'
+        - '&#C7D0D9» Right click: &#FFFFFF-{offset_step}'
+        - '&#C7D0D9» Shift click: &#FFFFFFExact offset'
+
+    offset-y:
+      slot: 29
+      material: LIME_DYE
+      name: '&#47FF79Offset Y'
+      lore:
+        - ' &#D3DBE3◆ Current: &#FFFFFF{offset_y}'
+        - ''
+        - '&#C7D0D9» Left click: &#FFFFFF+{offset_step}'
+        - '&#C7D0D9» Right click: &#FFFFFF-{offset_step}'
+        - '&#C7D0D9» Shift click: &#FFFFFFExact offset'
+
+    offset-z:
+      slot: 30
+      material: LIGHT_BLUE_DYE
+      name: '&#4DE1FFOffset Z'
+      lore:
+        - ' &#D3DBE3◆ Current: &#FFFFFF{offset_z}'
+        - ''
+        - '&#C7D0D9» Left click: &#FFFFFF+{offset_step}'
+        - '&#C7D0D9» Right click: &#FFFFFF-{offset_step}'
+        - '&#C7D0D9» Shift click: &#FFFFFFExact offset'
+
+    glow:
+      slot: 31
+      material: GLOWSTONE_DUST
+      name: '&#FFE45CGlow'
+      lore:
+        - '&#7A8592A colored outline visible through walls'
+        - ''
+        - ' &#D3DBE3◆ Current: &#FFFFFF{glow}'
+        - ''
+        - '&#C7D0D9» Click: &#FFFFFFToggle'
+
+    glow-color:
+      slot: 32
+      material: ORANGE_DYE
+      name: '&#FFE45CGlow Color'
+      lore:
+        - ' &#D3DBE3◆ Current: &#FFFFFF{glow_color}'
+        - ''
+        - '&#C7D0D9» Left click: &#FFFFFFNext color'
+        - '&#C7D0D9» Right click: &#FFFFFFPrevious color'
+        - '&#C7D0D9» Shift click: &#FFFFFFCustom hex color'
+
+    brightness:
+      slot: 33
+      material: LANTERN
+      name: '&#FFE45CBrightness'
+      lore:
+        - '&#7A8592Fixed light level, Default uses the world light'
+        - ''
+        - ' &#D3DBE3◆ Current: &#FFFFFF{brightness}'
+        - ''
+        - '&#C7D0D9» Left click: &#FFFFFFBrighter'
+        - '&#C7D0D9» Right click: &#FFFFFFDarker'
+
+    view-range:
+      slot: 34
+      material: SPYGLASS
+      name: '&#4DE1FFView Range'
+      lore:
+        - '&#7A8592How far away it is still rendered (x64 blocks)'
+        - ''
+        - ' &#D3DBE3◆ Current: &#FFFFFF{view_range}'
+        - ''
+        - '&#C7D0D9» Left click: &#FFFFFFFarther'
+        - '&#C7D0D9» Right click: &#FFFFFFCloser'
+
+    spin:
+      slot: 37
+      material: MUSIC_DISC_CAT
+      name: '&#FF7AD9Spin'
+      flag: [ HIDE_ADDITIONAL_TOOLTIP ]
+      lore:
+        - ' &#D3DBE3◆ Status: &#FFFFFF{spin}'
+        - ' &#D3DBE3◆ Speed: &#FFFFFF{spin_speed}°/s'
+        - ''
+        - '&#C7D0D9» Left click: &#FFFFFFToggle'
+        - '&#C7D0D9» Right click: &#FFFFFFChange speed'
+
+    bob:
+      slot: 38
+      material: FEATHER
+      name: '&#FF7AD9Bobbing'
+      lore:
+        - '&#7A8592Floats up and down'
+        - ''
+        - ' &#D3DBE3◆ Status: &#FFFFFF{bob}'
+        - ' &#D3DBE3◆ Height: &#FFFFFF{bob_height}'
+        - ''
+        - '&#C7D0D9» Left click: &#FFFFFFToggle'
+        - '&#C7D0D9» Right click: &#FFFFFFChange height'
+
+    hitbox:
+      slot: 39
+      material: SCAFFOLDING
+      name: '&#FFBD72Hitbox'
+      lore:
+        - '&#7A8592The area players can click'
+        - ''
+        - ' &#D3DBE3◆ Current: &#FFFFFF{hitbox}'
+        - ''
+        - '&#C7D0D9» Left click: &#FFFFFFExact width and height'
+        - '&#C7D0D9» Right click: &#FFFFFFAutomatic'
+
+    reset:
+      slot: 43
+      material: TNT
+      name: '&#FF3C52Reset Transform'
+      lore:
+        - '&#7A8592Scale, rotation, offset and hitbox'
+        - '&#7A8592back to default'
+        - ''
+        - '&#C7D0D9» Shift click: &#FFFFFFReset'
+
+    back:
+      slot: 49
+      material: ARROW
+      name: '&#C7D0D9Back'
+
+  decoration:
+    filler:
+      slot: fill
+      material: GRAY_STAINED_GLASS_PANE
+      name: ' '
+
+hologram:
+  title: '&8Hologram: {id}'
+  size: 36
+  tick: 0
+
+  sounds:
+    open: "minecraft:block.chest.open"
+    action: "minecraft:ui.button.click"
+    error: "minecraft:block.note_block.bass"
+
+  items:
+    toggle:
+      slot: 10
+      material: LEVER
+      name: '&#FFE45CHologram'
+      lore:
+        - ' &#D3DBE3◆ Status: &#FFFFFF{state}'
+        - ''
+        - '&#C7D0D9» Click: &#FFFFFFToggle'
+
+    lines:
+      slot: 11
+      material: WRITABLE_BOOK
+      name: '&#FFE45CText'
+      lore:
+        - ' &#D3DBE3◆ Lines: &#FFFFFF{count}/{max}'
+        - ''
+        - '&#FFFFFF{lines}'
+        - ''
+        - '&#C7D0D9» Left click: &#FFFFFFEdit'
+        - '&#C7D0D9» Right click: &#FFFFFFClear'
+
+    height:
+      slot: 12
+      material: LADDER
+      name: '&#FFE45CHeight'
+      lore:
+        - '&#7A8592Distance above the block'
+        - ''
+        - ' &#D3DBE3◆ Current: &#FFFFFF{height}'
+        - ''
+        - '&#C7D0D9» Left click: &#FFFFFFHigher'
+        - '&#C7D0D9» Right click: &#FFFFFFLower'
+
+    billboard:
+      slot: 13
+      material: PAINTING
+      name: '&#FFE45CBillboard'
+      lore:
+        - '&#7A8592CENTER always faces the player, FIXED keeps'
+        - '&#7A8592one direction, VERTICAL / HORIZONTAL turn'
+        - '&#7A8592around one axis only'
+        - ''
+        - ' &#D3DBE3◆ Current: &#FFFFFF{billboard}'
+        - ''
+        - '&#C7D0D9» Left click: &#FFFFFFNext'
+        - '&#C7D0D9» Right click: &#FFFFFFPrevious'
+
+    view-range:
+      slot: 14
+      material: SPYGLASS
+      name: '&#FFE45CView Range'
+      lore:
+        - '&#7A8592How far away the text is still rendered (x64 blocks)'
+        - ''
+        - ' &#D3DBE3◆ Current: &#FFFFFF{view_range}'
+        - ''
+        - '&#C7D0D9» Left click: &#FFFFFFFarther'
+        - '&#C7D0D9» Right click: &#FFFFFFCloser'
+
+    background:
+      slot: 15
+      material: BLACK_STAINED_GLASS
+      name: '&#FFE45CBackground'
+      lore:
+        - ' &#D3DBE3◆ Status: &#FFFFFF{background}'
+        - ''
+        - '&#C7D0D9» Click: &#FFFFFFToggle'
+
+    shadow:
+      slot: 16
+      material: INK_SAC
+      name: '&#FFE45CText Shadow'
+      lore:
+        - ' &#D3DBE3◆ Status: &#FFFFFF{shadow}'
+        - ''
+        - '&#C7D0D9» Click: &#FFFFFFToggle'
+
+    back:
+      slot: 31
+      material: ARROW
+      name: '&#C7D0D9Back'
+
+  decoration:
+    filler:
+      slot: fill
+      material: GRAY_STAINED_GLASS_PANE
+      name: ' '
+
+list:
+  title: '&8Clickable Blocks'
+  size: 54
+  tick: 0
+  content-slots: [ 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 28, 29, 30, 31, 32, 33, 34, 37, 38, 39, 40, 41, 42, 43 ]
+
+  sounds:
+    open: "minecraft:block.chest.open"
+    action: "minecraft:ui.button.click"
+    error: "minecraft:block.note_block.bass"
+    page: "minecraft:item.book.page_turn"
+
+  items:
+    # The material is replaced by the block or displayed item when possible.
+    entry:
+      material: PAPER
+      name: '&#FFBD72{id}'
+      flag: [ HIDE_ATTRIBUTES, HIDE_ADDITIONAL_TOOLTIP ]
+      lore:
+        - '&#7A8592Type: &#FFFFFF{type}'
+        - '&#7A8592Location: &#FFFFFF{location}'
+        - '&#7A8592Status: &#FFFFFF{state}'
+        - '&#7A8592Actions: &#FFFFFF{actions}'
+        - ''
+        - '&#C7D0D9» Left click: &#FFFFFFEdit'
+        - '&#C7D0D9» Right click: &#FFFFFFTeleport'
+        - '&#C7D0D9» Shift + right: &#FFFFFFEnable / disable'
+
+    empty:
+      slot: 22
+      material: STRUCTURE_VOID
+      name: '&#878787No clickable blocks yet'
+      lore:
+        - '&#7A8592Grab the wand and right click any block,'
+        - '&#7A8592or use /cb create <id>'
+
+    previous:
+      slot: 48
+      material: SPECTRAL_ARROW
+      name: '&#C7D0D9Previous Page'
+      lore:
+        - '&#7A8592Page {page}/{pages}'
+
+    next:
+      slot: 50
+      material: SPECTRAL_ARROW
+      name: '&#C7D0D9Next Page'
+      lore:
+        - '&#7A8592Page {page}/{pages}'
+
+    wand:
+      slot: 45
+      material: BLAZE_ROD
+      name: '&#FFBD72Get the Wand'
+      lore:
+        - '&#7A8592Right click a block: create'
+        - '&#7A8592Click a clickable: edit'
+        - ''
+        - '&#C7D0D9» Click: &#FFFFFFGet it'
+
+    close:
+      slot: 49
+      material: OAK_DOOR
+      name: '&#FF3C52Close'
+      lore:
+        - '&#7A8592{count} clickable blocks'
+
+  decoration:
+    filler:
+      slot: fill
+      material: GRAY_STAINED_GLASS_PANE
+      name: ' '
+
+create:
+  title: '&8Create a Clickable'
+  size: 27
+  tick: 0
+
+  sounds:
+    open: "minecraft:block.chest.open"
+    action: "minecraft:ui.button.click"
+    error: "minecraft:block.note_block.bass"
+
+  items:
+    info:
+      slot: 4
+      material: NAME_TAG
+      name: '&#FFBD72New Clickable'
+      lore:
+        - '&#7A8592Location: &#FFFFFF{location}'
+        - ''
+        - '&#7A8592Tip: hold an item before you pick'
+        - '&#7A8592a display, it will show that item'
+
+    block:
+      slot: 11
+      material: GRASS_BLOCK
+      name: '&#47FF79Block'
+      lore:
+        - '&#7A8592Turns the clicked block itself'
+        - '&#7A8592into a clickable block'
+        - ''
+        - '&#C7D0D9» Click: &#FFFFFFCreate'
+
+    item-display:
+      slot: 13
+      material: DIAMOND
+      name: '&#C77DFFItem Display'
+      lore:
+        - '&#7A8592A floating item or block you can'
+        - '&#7A8592scale, rotate, spin and make glow'
+        - ''
+        - '&#C7D0D9» Click: &#FFFFFFCreate'
+
+    block-display:
+      slot: 15
+      material: GOLD_BLOCK
+      name: '&#FFE45CBlock Display'
+      lore:
+        - '&#7A8592A floating block model, perfect'
+        - '&#7A8592for stretched or tiny blocks'
+        - ''
+        - '&#C7D0D9» Click: &#FFFFFFCreate'
+
+    close:
+      slot: 22
+      material: OAK_DOOR
+      name: '&#FF3C52Close'
+
+  decoration:
+    filler:
+      slot: fill
+      material: GRAY_STAINED_GLASS_PANE
+      name: ' '
+
+confirm:
+  title: '&8Are you sure?'
+  size: 27
+  tick: 0
+
+  sounds:
+    open: "minecraft:block.chest.open"
+    action: "minecraft:ui.button.click"
+    confirm: "minecraft:entity.generic.explode"
+    error: "minecraft:block.note_block.bass"
+
+  items:
+    info:
+      slot: 13
+      material: PAPER
+      name: '&#FFBD72{question}'
+      lore:
+        - '&#7A8592This can not be undone'
+
+    accept:
+      slot: 11
+      material: LIME_CONCRETE
+      name: '&#47FF79Yes'
+      lore:
+        - '&#7A8592{question}'
+
+    cancel:
+      slot: 15
+      material: RED_CONCRETE
+      name: '&#FF3C52No'
+
+  decoration:
+    filler:
+      slot: fill
+      material: GRAY_STAINED_GLASS_PANE
+      name: ' '
+
+version: 1
