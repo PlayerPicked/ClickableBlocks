@@ -8,4 +8,8 @@ hooks:
   placeholderapi:
     enabled: true
 
-version: 1
+  # hdb:<id> heads in the appearance editor and /cb head (needs HeadDatabase).
+  headdatabase:
+    enabled: true
+
+version: 2

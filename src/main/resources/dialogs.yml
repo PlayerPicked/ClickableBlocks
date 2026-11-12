@@ -246,4 +246,24 @@ dialogs:
       label: "&#F06464Cancel"
       width: 100
 
-version: 1
+  head:
+    title: "&#FFFFFFHead of {id}"
+    body:
+      - "&#CDD5E0Any of these work:"
+      - "&#FFBD72Notch &#8B95A5- player name"
+      - "&#FFBD72069a79f4-44e9-4726-a5be-fca90e38aaf5 &#8B95A5- player UUID"
+      - "&#FFBD72eyJ0ZXh0dXJlcyI6... &#8B95A5- texture value (base64)"
+      - "&#FFBD72http://textures.minecraft.net/texture/... &#8B95A5- texture URL or hash"
+      - "&#FFBD72hdb:1234 &#8B95A5- HeadDatabase id"
+    input:
+      label: "&#8B95A5Head"
+      width: 400
+      max-length: 4096
+    confirm:
+      label: "&#6BD88BSave"
+      width: 100
+    cancel:
+      label: "&#F06464Cancel"
+      width: 100
+
+version: 2

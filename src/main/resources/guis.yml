@@ -466,6 +466,20 @@ appearance:
         - '&#C7D0D9» Click: &#FFFFFFUse the block in your hand'
         - '&#C7D0D9» Or click any block in your inventory'
 
+    head:
+      slot: 5
+      material: PLAYER_HEAD
+      name: '&#C77DFFPlayer Head'
+      lore:
+        - '&#7A8592Show a head with any skin'
+        - ''
+        - ' &#D3DBE3◆ Current: &#FFFFFF{head}'
+        - ''
+        - '&#7A8592Player name, UUID, texture value,'
+        - '&#7A8592texture URL or hdb:<id> (HeadDatabase)'
+        - ''
+        - '&#C7D0D9» Click: &#FFFFFFSet the head'
+
     scale:
       slot: 19
       material: SLIME_BALL
@@ -951,4 +965,4 @@ confirm:
       material: GRAY_STAINED_GLASS_PANE
       name: ' '
 
-version: 1
+version: 2

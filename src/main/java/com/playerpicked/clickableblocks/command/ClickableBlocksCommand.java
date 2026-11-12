@@ -148,6 +148,17 @@ public final class ClickableBlocksCommand {
         plugin.getEditorService().move(player, block, target);
     }
 
+    @Subcommand("head")
+    public void head(@NotNull BukkitCommandActor actor, @SuggestWith(BlockIdSuggestion.class) @NotNull String id, @NotNull String head) {
+        ClickableBlock block = plugin.getBlockManager().get(id).orElse(null);
+        if (block == null) {
+            MessageKeys.BLOCK_NOT_FOUND.send(actor.sender(), "{id}", id);
+            return;
+        }
+
+        plugin.getEditorService().applyHead(actor.sender(), block, head, success -> {});
+    }
+
     @Subcommand("toggle")
     public void toggle(@NotNull BukkitCommandActor actor, @SuggestWith(BlockIdSuggestion.class) @NotNull String id) {
         ClickableBlock block = plugin.getBlockManager().get(id).orElse(null);

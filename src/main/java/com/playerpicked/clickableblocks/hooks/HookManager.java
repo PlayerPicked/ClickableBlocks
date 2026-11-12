@@ -2,6 +2,7 @@ package com.playerpicked.clickableblocks.hooks;
 
 import com.playerpicked.clickableblocks.ClickableBlocks;
 import com.playerpicked.clickableblocks.hooks.impl.economy.VaultHook;
+import com.playerpicked.clickableblocks.hooks.impl.head.HeadDatabaseHook;
 import com.playerpicked.clickableblocks.hooks.impl.placeholder.PlaceholderHook;
 import com.playerpicked.clickableblocks.utils.LoggerUtils;
 import lombok.Getter;
@@ -19,14 +20,17 @@ public final class HookManager {
 
     @Getter @Nullable private volatile VaultHook economy;
     @Nullable private volatile PlaceholderHook placeholder;
+    @Getter @Nullable private volatile HeadDatabaseHook headDatabase;
 
     public void load() {
         loadVault();
         loadPlaceholderApi();
+        loadHeadDatabase();
     }
 
     public void unload() {
         economy = null;
+        headDatabase = null;
 
         PlaceholderHook current = placeholder;
         if (current != null) {
@@ -85,6 +89,17 @@ public final class HookManager {
 
         placeholder = hook;
         LoggerUtils.info("{}   [Hook] PlaceholderAPI successfully enabled.{}", GREEN, RESET);
+    }
+
+    private void loadHeadDatabase() {
+        headDatabase = null;
+        if (!isEnabled("headdatabase") || !isPluginPresent("HeadDatabase")) return;
+
+        HeadDatabaseHook hook = HeadDatabaseHook.create();
+        if (hook == null) return;
+
+        headDatabase = hook;
+        LoggerUtils.info("{}   [Hook] HeadDatabase successfully enabled.{}", GREEN, RESET);
     }
 
     private boolean isEnabled(@NotNull String hook) {

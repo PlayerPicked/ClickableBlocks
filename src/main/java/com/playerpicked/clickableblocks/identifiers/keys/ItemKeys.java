@@ -51,6 +51,7 @@ public enum ItemKeys {
 
     APPEARANCE_ITEM("appearance.items.item"),
     APPEARANCE_BLOCK("appearance.items.block"),
+    APPEARANCE_HEAD("appearance.items.head"),
     APPEARANCE_SCALE("appearance.items.scale"),
     APPEARANCE_YAW("appearance.items.yaw"),
     APPEARANCE_PITCH("appearance.items.pitch"),

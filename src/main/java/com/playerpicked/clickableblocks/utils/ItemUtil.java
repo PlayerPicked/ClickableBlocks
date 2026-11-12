@@ -73,6 +73,14 @@ public final class ItemUtil {
     }
 
     @NotNull
+    public String describe(@NotNull ItemStack item) {
+        String owner = HeadUtil.owner(item);
+        if (owner == null) return prettyName(item.getType());
+        if (owner.isEmpty()) return MessageKeys.PLACEHOLDER_CUSTOM_HEAD.getMessage();
+        return MessageKeys.PLACEHOLDER_PLAYER_HEAD.getMessage("{name}", owner);
+    }
+
+    @NotNull
     public String prettyName(@NotNull Material material) {
         String[] words = material.name().toLowerCase(Locale.ROOT).split("_");
         StringBuilder builder = new StringBuilder();

@@ -21,6 +21,9 @@ placeholders:
   unlimited: "Unlimited"
   free: "Free"
   ready: "Ready"
+  # {name} = owner of the head
+  player-head: "{name}'s Head"
+  custom-head: "Custom Head"
 
 triggers:
   LEFT: "Left click"
@@ -88,6 +91,7 @@ messages:
     - "&#FFB74D/cb info [id] &#8B95A5- &#CDD5E0Show the details of a block"
     - "&#FFB74D/cb tp <id> &#8B95A5- &#CDD5E0Teleport to a block"
     - "&#FFB74D/cb movehere <id> &#8B95A5- &#CDD5E0Move a block to where you look"
+    - "&#FFB74D/cb head <id> <head> &#8B95A5- &#CDD5E0Show a head by name, UUID, texture or hdb:<id>"
     - "&#FFB74D/cb toggle <id> &#8B95A5- &#CDD5E0Enable or disable a block"
     - "&#FFB74D/cb resetuses <id> &#8B95A5- &#CDD5E0Reset the uses and cooldowns of a block"
     - "&#FFB74D/cb run <id> <player> [trigger] &#8B95A5- &#CDD5E0Run the actions for a player"
@@ -113,6 +117,10 @@ messages:
     item-set: "%prefix%&#6BD88BDisplayed item set to {item}."
     not-a-block: "%prefix%&#F06464That item is not a placeable block."
     material-set: "%prefix%&#6BD88BBlock changed to {item}."
+    head-loading: "%prefix%&#CDD5E0Looking up the head &#FFB74D{input}&#CDD5E0..."
+    head-invalid: "%prefix%&#F06464{input} is not a valid head. Use a player name, UUID, texture value, texture URL or hdb:<id>."
+    head-not-found: "%prefix%&#F06464No head found for {input}."
+    head-hdb-missing: "%prefix%&#F06464HeadDatabase is not installed, hdb: heads can't be used."
     tested: "%prefix%&#6BD88BTest run of {id} finished &#8B95A5({trigger})"
     no-actions: "%prefix%&#F5C04DThere are no actions for {trigger}."
     uses-reset: "%prefix%&#6BD88BUses and cooldowns of {id} were reset."
@@ -176,4 +184,4 @@ messages:
     input-cancelled: "%prefix%&#8B95A5Input cancelled."
     block-removed: "%prefix%&#F06464The clickable block {id} was deleted in the meantime."
 
-version: 1
+version: 2

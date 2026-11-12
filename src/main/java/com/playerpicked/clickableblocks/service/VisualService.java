@@ -10,6 +10,7 @@ import com.playerpicked.clickableblocks.model.ClickableBlock;
 import com.playerpicked.clickableblocks.model.DisplaySettings;
 import com.playerpicked.clickableblocks.model.HologramSettings;
 import com.playerpicked.clickableblocks.processor.MessageProcessor;
+import com.playerpicked.clickableblocks.utils.HeadUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
@@ -166,7 +167,7 @@ public final class VisualService {
             return;
         }
 
-        Class<? extends Display> wanted = type == ClickableType.ITEM_DISPLAY ? ItemDisplay.class : BlockDisplay.class;
+        Class<? extends Display> wanted = rendersAsItem(block) ? ItemDisplay.class : BlockDisplay.class;
 
         if (!isValid(handle.main) || !wanted.isInstance(handle.main)) {
             remove(handle.main);
@@ -188,7 +189,7 @@ public final class VisualService {
 
         if (display instanceof ItemDisplay itemDisplay) {
             itemDisplay.setItemStack(settings.getItem());
-            itemDisplay.setItemDisplayTransform(itemTransform(settings.getTransform()));
+            itemDisplay.setItemDisplayTransform(type == ClickableType.ITEM_DISPLAY ? itemTransform(settings.getTransform()) : ItemDisplay.ItemDisplayTransform.NONE);
         }
 
         if (display instanceof BlockDisplay blockDisplay) blockDisplay.setBlock(blockData(settings.getMaterial()));
@@ -305,13 +306,18 @@ public final class VisualService {
         Vector3f scale = new Vector3f(settings.getScaleX(), settings.getScaleY(), settings.getScaleZ());
         Vector3f translation = new Vector3f(0f, bob, 0f);
 
-        if (block.getType() == ClickableType.BLOCK_DISPLAY) {
+        if (!rendersAsItem(block)) {
             Vector3f half = new Vector3f(-0.5f * scale.x, -0.5f * scale.y, -0.5f * scale.z);
             rotation.transform(half);
             translation.add(half);
         }
 
         return new Transformation(translation, rotation, scale, new Quaternionf());
+    }
+
+    private static boolean rendersAsItem(@NotNull ClickableBlock block) {
+        return block.getType() == ClickableType.ITEM_DISPLAY
+                || (block.getType() == ClickableType.BLOCK_DISPLAY && HeadUtil.isSkull(block.getDisplay().getMaterial()));
     }
 
     private float spinAngle(@NotNull DisplaySettings settings) {

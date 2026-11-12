@@ -18,7 +18,8 @@ public enum DialogKeys {
     SCALE("dialogs.scale"),
     ROTATION("dialogs.rotation"),
     OFFSET("dialogs.offset"),
-    HITBOX("dialogs.hitbox");
+    HITBOX("dialogs.hitbox"),
+    HEAD("dialogs.head");
 
     private final String path;
 

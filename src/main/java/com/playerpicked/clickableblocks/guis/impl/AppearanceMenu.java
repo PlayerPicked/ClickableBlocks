@@ -12,6 +12,7 @@ import com.playerpicked.clickableblocks.identifiers.keys.MessageKeys;
 import com.playerpicked.clickableblocks.model.ClickableBlock;
 import com.playerpicked.clickableblocks.model.DisplaySettings;
 import com.playerpicked.clickableblocks.utils.FormatUtil;
+import com.playerpicked.clickableblocks.utils.HeadUtil;
 import com.playerpicked.clickableblocks.utils.ItemUtil;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Display;
@@ -51,10 +52,12 @@ public final class AppearanceMenu extends BlockMenu {
 
         if (block.getType() == ClickableType.BLOCK) {
             place(ItemKeys.APPEARANCE_BLOCK, info);
+            place(ItemKeys.APPEARANCE_HEAD, info);
             place(ItemKeys.APPEARANCE_GLOW, info);
             place(ItemKeys.APPEARANCE_GLOW_COLOR, info);
         } else {
             place(ItemKeys.APPEARANCE_ITEM, info);
+            place(ItemKeys.APPEARANCE_HEAD, info);
             place(ItemKeys.APPEARANCE_SCALE, info);
             place(ItemKeys.APPEARANCE_YAW, info);
             place(ItemKeys.APPEARANCE_PITCH, info);
@@ -133,6 +136,11 @@ public final class AppearanceMenu extends BlockMenu {
             display.setGlowColor(color);
             if (!display.isGlow()) display.setGlow(true);
             edited("glow-color", FormatUtil.color(color));
+            return;
+        }
+
+        if (ItemKeys.APPEARANCE_HEAD.matches(slot)) {
+            askHead(player);
             return;
         }
 
@@ -297,25 +305,30 @@ public final class AppearanceMenu extends BlockMenu {
             return;
         }
 
-        if (block.getType() == ClickableType.BLOCK) {
-            if (plugin.getEditorService().setPhysicalBlock(player, block, item.getType())) {
+        if (plugin.getEditorService().setDisplayedItem(player, block, item)) {
+            sound("action");
+            updateMenuItems();
+        } else error();
+    }
+
+    private void askHead(@NotNull Player player) {
+        ItemStack current = block.getType() == ClickableType.BLOCK && block.getPosition().getBlock() != null
+                ? HeadUtil.toItem(block.getPosition().getBlock())
+                : block.getDisplay().getItem();
+        String owner = HeadUtil.owner(current);
+
+        ask(DialogKeys.HEAD, owner == null ? "" : owner, value -> {
+            if (value.isBlank()) return;
+            plugin.getEditorService().applyHead(player, block, value, success -> {
+                if (!success) {
+                    error();
+                    return;
+                }
+
                 sound("action");
-                updateMenuItems();
-            } else error();
-            return;
-        }
-
-        if (block.getType() == ClickableType.BLOCK_DISPLAY && !item.getType().isBlock()) {
-            MessageKeys.BLOCK_NOT_A_BLOCK.send(player);
-            error();
-            return;
-        }
-
-        block.getDisplay().setItem(item);
-        plugin.getEditorService().changed(block);
-        MessageKeys.BLOCK_ITEM_SET.send(player, "{item}", ItemUtil.prettyName(item.getType()));
-        sound("action");
-        updateMenuItems();
+                if (player.getOpenInventory().getTopInventory().getHolder(false) instanceof AppearanceMenu open && open.getBlock() == block) open.updateMenuItems();
+            });
+        });
     }
 
     private void askVector(@NotNull DialogKeys key, @NotNull String initial, int size, @NotNull java.util.function.Consumer<double[]> onValues) {
@@ -333,12 +346,13 @@ public final class AppearanceMenu extends BlockMenu {
     @NotNull
     private String[] placeholders(@NotNull DisplaySettings display) {
         Block physical = block.getPosition().getBlock();
-        String blockName = physical == null ? MessageKeys.PLACEHOLDER_NONE.getMessage() : ItemUtil.prettyName(physical.getType());
+        String blockName = physical == null ? MessageKeys.PLACEHOLDER_NONE.getMessage() : ItemUtil.describe(HeadUtil.toItem(physical));
 
         return new String[]{
                 "{id}", block.getId(),
-                "{item}", ItemUtil.prettyName(display.getMaterial()),
+                "{item}", ItemUtil.describe(display.getItem()),
                 "{block}", blockName,
+                "{head}", block.getType() == ClickableType.BLOCK ? blockName : ItemUtil.describe(display.getItem()),
                 "{scale}", scaleText(display),
                 "{yaw}", FormatUtil.number(display.getYaw()),
                 "{pitch}", FormatUtil.number(display.getPitch()),

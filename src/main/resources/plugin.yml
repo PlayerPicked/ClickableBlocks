@@ -9,7 +9,7 @@ description: Clickable blocks and item displays that run actions, built fully in
 website: https://dc.playerpicked.com
 authors: [ kxtsoo ]
 
-softdepend: [ Vault, PlaceholderAPI ]
+softdepend: [ Vault, PlaceholderAPI, HeadDatabase ]
 
 permissions:
   clickableblocks.*:

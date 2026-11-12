@@ -11,9 +11,11 @@ import com.playerpicked.clickableblocks.manager.CooldownManager;
 import com.playerpicked.clickableblocks.manager.UsageManager;
 import com.playerpicked.clickableblocks.model.BlockPosition;
 import com.playerpicked.clickableblocks.model.ClickableBlock;
+import com.playerpicked.clickableblocks.utils.HeadUtil;
 import com.playerpicked.clickableblocks.utils.ItemUtil;
 import dev.dejvokep.boostedyaml.block.implementation.Section;
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -27,6 +29,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
+import java.util.function.Consumer;
 
 public final class EditorService {
     public static final String ADMIN_PERMISSION = "clickableblocks.admin";
@@ -148,8 +151,9 @@ public final class EditorService {
             Block physical = block.getPosition().getBlock();
 
             if (physical != null && physical.getType().isAir()) {
-                Material material = block.getDisplay().getMaterial();
-                physical.setType(material.isBlock() && !material.isAir() ? material : ItemUtil.material(ConfigKeys.EDITOR_DEFAULT_BLOCK.getRawString("GOLD_BLOCK"), Material.GOLD_BLOCK), false);
+                ItemStack item = block.getDisplay().getItem();
+                if (item.getType().isBlock() && !item.getType().isAir()) HeadUtil.place(physical, item);
+                else physical.setType(ItemUtil.material(ConfigKeys.EDITOR_DEFAULT_BLOCK.getRawString("GOLD_BLOCK"), Material.GOLD_BLOCK), false);
             }
         }
 
@@ -186,21 +190,66 @@ public final class EditorService {
         });
     }
 
-    public boolean setPhysicalBlock(@NotNull Player player, @NotNull ClickableBlock block, @NotNull Material material) {
+    public boolean setPhysicalBlock(@NotNull CommandSender sender, @NotNull ClickableBlock block, @NotNull ItemStack item) {
+        Material material = item.getType();
         if (!material.isBlock() || material.isAir()) {
-            MessageKeys.BLOCK_NOT_A_BLOCK.send(player);
+            MessageKeys.BLOCK_NOT_A_BLOCK.send(sender);
             return false;
         }
 
         Block physical = block.getPosition().getBlock();
         if (physical == null) {
-            MessageKeys.BLOCK_WORLD_NOT_LOADED.send(player, "{world}", block.getPosition().world());
+            MessageKeys.BLOCK_WORLD_NOT_LOADED.send(sender, "{world}", block.getPosition().world());
             return false;
         }
 
-        physical.setType(material, false);
+        HeadUtil.place(physical, item);
+        block.getDisplay().setItem(item);
         changed(block);
-        MessageKeys.BLOCK_MATERIAL_SET.send(player, "{item}", ItemUtil.prettyName(material));
+        MessageKeys.BLOCK_MATERIAL_SET.send(sender, "{item}", ItemUtil.describe(item));
+        return true;
+    }
+
+    public void applyHead(@NotNull CommandSender sender, @NotNull ClickableBlock block, @NotNull String input, @NotNull Consumer<Boolean> done) {
+        MessageKeys.BLOCK_HEAD_LOADING.send(sender, "{input}", input);
+
+        HeadUtil.resolve(input).thenAccept(result -> {
+            Runnable apply = () -> {
+                if (manager.get(block.getId()).orElse(null) != block) {
+                    MessageKeys.EDITOR_BLOCK_REMOVED.send(sender, "{id}", block.getId());
+                    done.accept(false);
+                    return;
+                }
+
+                if (!result.success()) {
+                    (switch (result.failure()) {
+                        case HDB_MISSING -> MessageKeys.BLOCK_HEAD_HDB_MISSING;
+                        case NOT_FOUND -> MessageKeys.BLOCK_HEAD_NOT_FOUND;
+                        case null, default -> MessageKeys.BLOCK_HEAD_INVALID;
+                    }).send(sender, "{input}", input);
+                    done.accept(false);
+                    return;
+                }
+
+                done.accept(setDisplayedItem(sender, block, result.head()));
+            };
+
+            if (sender instanceof Player player) ClickableBlocks.getScheduler().runTask(player, apply);
+            else ClickableBlocks.getScheduler().runTask(apply);
+        });
+    }
+
+    public boolean setDisplayedItem(@NotNull CommandSender sender, @NotNull ClickableBlock block, @NotNull ItemStack item) {
+        if (block.getType() == ClickableType.BLOCK) return setPhysicalBlock(sender, block, item);
+
+        if (block.getType() == ClickableType.BLOCK_DISPLAY && !item.getType().isBlock()) {
+            MessageKeys.BLOCK_NOT_A_BLOCK.send(sender);
+            return false;
+        }
+
+        block.getDisplay().setItem(item);
+        changed(block);
+        MessageKeys.BLOCK_ITEM_SET.send(sender, "{item}", ItemUtil.describe(item));
         return true;
     }
 
@@ -255,7 +304,7 @@ public final class EditorService {
 
         if (type == ClickableType.BLOCK) {
             Block physical = player.getTargetBlockExact(Math.clamp(ConfigKeys.EDITOR_REACH.getInt(6), 2, 32));
-            if (physical != null && physical.getType().isItem()) return new ItemStack(physical.getType());
+            if (physical != null && (physical.getType().isItem() || physical.getType() == Material.PLAYER_WALL_HEAD)) return HeadUtil.toItem(physical);
         }
 
         String configured = type == ClickableType.ITEM_DISPLAY
